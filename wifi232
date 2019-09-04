@@ -55,35 +55,30 @@ function printHelp() {
 
 function handleCommand(command) {
     let cms = command.trim().split("=")
-    if (cms.length > 0) {
-        const name = "AT+"+cms[0].toUpperCase()
-        let match = matchers.get(name)
-        if (match == undefined) {
-            printHelp()
-            process.exit(1)
-        }
+    const name = "AT+"+cms[0].toUpperCase()
 
-        if (1 == cms.length) {
-            if (debugOn) {
-                console.log("[Debug] Sending command:", name)
-            }
-            intervalHandle = setInterval( function () {
-                match.inquire(port)
-            }, 50);
-        } else if (2 == cms.length) {
-            if (debugOn) {
-                console.log("[Debug] Sending command:", name+"="+cms[1])
-            }
-            intervalHandle = setInterval( function () {
-                match.configure(port, cms[1])
-            }, 50);
-        } else {
-            console.log("Command", "`"+command+"`", "not support")
-            process.exit(1)
-        }
-    }
-    else {
+    let match = matchers.get(name)
+    if (match == undefined) {
         printHelp()
+        process.exit(1)
+    }
+
+    if (1 == cms.length) {
+        if (debugOn) {
+            console.log("[Debug] Sending command:", name)
+        }
+        intervalHandle = setInterval( function () {
+            match.inquire(port)
+        }, 50);
+    } else if (2 == cms.length) {
+        if (debugOn) {
+            console.log("[Debug] Sending command:", name+"="+cms[1])
+        }
+        intervalHandle = setInterval( function () {
+            match.configure(port, cms[1])
+        }, 50);
+    } else {
+        console.log("Command", "`"+command+"`", "not support")
         process.exit(1)
     }
 }
