@@ -1,0 +1,95 @@
+#!/usr/bin/env node
+
+"use strict"
+
+global.debugOn = false
+global.deviceReady = false
+global.intervalHandle = undefined
+
+const fs = require("fs")
+const SerialPort = require("serialport")
+const handle = require("./configure/handle")
+const matchers = require("./configure/matchers")
+
+const port = new SerialPort("/dev/ttymxc1", {
+    autoOpen: false,
+    baudRate: 57600
+})
+
+var files = fs.readdirSync(__dirname + "/handlers")
+var js_files = files.filter( f => f.endsWith(".js") )
+for (let f of js_files) {
+    if (debugOn) {
+        console.log("[Debug] Handling js file:", f)
+    }
+    require(__dirname + "/handlers/" + f)()
+}
+
+function printHelp() {
+    const usageTextStart = `
+ wifi232 配置工具
+
+ 用法：
+   wifi232 <命令>
+
+   可用命令如下：`
+    const usageTextEnd = "   help\t\t显示帮助信息\n"
+
+    console.log(usageTextStart)
+    for (let [k, v] of matchers) {
+        if (k != "open") {
+            console.log(v.info)
+            console.log()
+        }
+    }
+    console.log(usageTextEnd)
+}
+
+function handleCommand(command) {
+    let cms = command.trim().split("=")
+    if (cms.length > 0) {
+        const name = "AT+"+cms[0].toUpperCase()
+        let match = matchers.get(name)
+        if (match == undefined) {
+            printHelp()
+            process.exit(1)
+        }
+
+        if (1 == cms.length) {
+            if (debugOn) {
+                console.log("[Debug] Sending command:", name)
+            }
+            intervalHandle = setInterval( function () {
+                match.inquire(port)
+            }, 50);
+        } else if (2 == cms.length) {
+            if (debugOn) {
+                console.log("[Debug] Sending command:", name+"="+cms[1])
+            }
+            intervalHandle = setInterval( function () {
+                match.configure(port, cms[1])
+            }, 50);
+        } else {
+            console.log("Command", "`"+command+"`", "not support")
+            process.exit(1)
+        }
+    }
+    else {
+        printHelp()
+        process.exit(1)
+    }
+}
+
+if (process.argv.length < 3) {
+    printHelp()
+    process.exit(1)
+}
+
+if (process.argv[2] == "help") {
+    printHelp()
+    process.exit(0)
+}
+
+handleCommand(process.argv[2])
+
+handle.init(port)
