@@ -72,7 +72,7 @@ var init = function (serialPort) {
             process.exit(1);
         }
         if (debugOn) {
-            console.log("[Debug] /dev/ttymxc1 opened!")
+            console.log("[Debug]", global.uartDevice, "opened!")
             console.log("[Debug] Sending:", matchers.get("open").action, "to wifi232")
         }
         serialPort.write(matchers.get("open").action)

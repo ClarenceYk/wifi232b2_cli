@@ -3,6 +3,7 @@
 "use strict"
 
 global.debugOn = false
+global.uartDevice = undefined
 global.deviceReady = false
 global.intervalHandle = undefined
 
@@ -14,11 +15,11 @@ const matchers = require("./configure/matchers")
 let contents = fs.readFileSync('./config')
 const configs = JSON.parse(contents)
 
-const uartDevice = configs.device || false
 const uartBaudRate = configs.baudRate || 57600
+global.uartDevice = configs.device || "/dev/ttymxc1"
 global.debugOn = configs.debugOn || false
 
-const port = new SerialPort(uartDevice, {
+const port = new SerialPort(global.uartDevice, {
     autoOpen: false,
     baudRate: uartBaudRate
 })
