@@ -11,9 +11,16 @@ const SerialPort = require("serialport")
 const handle = require("./configure/handle")
 const matchers = require("./configure/matchers")
 
-const port = new SerialPort("/dev/ttymxc1", {
+let contents = fs.readFileSync('./config')
+const configs = JSON.parse(contents)
+
+const uartDevice = configs.device || false
+const uartBaudRate = configs.baudRate || 57600
+global.debugOn = configs.debugOn || false
+
+const port = new SerialPort(uartDevice, {
     autoOpen: false,
-    baudRate: 57600
+    baudRate: uartBaudRate
 })
 
 var files = fs.readdirSync(__dirname + "/handlers")

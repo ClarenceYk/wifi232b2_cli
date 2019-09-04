@@ -1,0 +1,5 @@
+{
+    "device": "/dev/ttymxc1",
+    "baudRate": 57600,
+    "debugOn": false
+}
