@@ -21,7 +21,7 @@ var count = 0
 var idx = 0
 var swingTimer = undefined
 
-function swingTimerHandle(sender) {
+function swingTimerHandler(sender) {
     if (!devicePower) {
         if (0 == count) {
             if (debugOn) {
@@ -55,7 +55,7 @@ var init = function () {
         info: "   z\t\t重启模块",
         handle: function (data, sender) {
             if (data == "+ok") {
-                swingTimer = setInterval( () => swingTimerHandle(sender), picInterval)
+                swingTimer = setInterval( () => swingTimerHandler(sender), picInterval)
             } else if (data.includes("ERR")) {
                 console.log("ERROR:", data)
                 process.exit(1)
