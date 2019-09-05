@@ -15,8 +15,8 @@ const pics = [
     "[  =    ]",
     "[ =     ]"
 ]
-const picInterval = 250 // ms
-const powerCheckInterval = 2000 // ms
+const picInterval = 200 // ms
+const powerCheckInterval = 1000 // ms
 var count = 0
 var idx = 0
 var swingTimer = undefined
@@ -29,7 +29,7 @@ function swingTimerHandle(sender) {
             }
             sender.write("+++")
         }
-        count += 250
+        count += picInterval
         count %= powerCheckInterval
     }
 

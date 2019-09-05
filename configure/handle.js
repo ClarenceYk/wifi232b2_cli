@@ -1,20 +1,12 @@
 
 const Buffer = require('buffer').Buffer
 const matchers = require("./matchers")
-const timeout = require("./timeout")
 
 var frame = {
     buff: Buffer.alloc(256),
     count: 0
 }
 var sender
-var timeoutHandle
-
-function timeoutFunc() {
-    if (frame.count > 0) {
-        handleEvent(frame.buff.toString("ascii", 0, frame.count))
-    }
-}
 
 function handleData(data) {
     for (let i = 0; i < data.length; i ++) {
@@ -23,27 +15,45 @@ function handleData(data) {
 }
 
 function handleChar(c) {
+    let eventStr = ""
+
     if (debugOn) {
         console.log("[Debug] Get Byte:", c)
     }
 
-    if (timeout()) {
-        timeoutHandle = setTimeout(timeoutFunc, 100)
-    }
-    else { // reset timer if not timeout
-        clearTimeout(timeoutHandle)
-        timeoutHandle = setTimeout(timeoutFunc, 100)
-    }
-
     frame.buff[frame.count++] = c
-    if (frame.count < 5) { // not enough
-        return
+
+    if (deviceReady) {
+        if (frame.count < 5) { // not enough
+            return
+        }
+        let end = frame.buff.toString("ascii", frame.count-4, frame.count)
+        if (end != "\r\n\r\n") {
+            return
+        }
+        eventStr = frame.buff.toString("ascii", 0, frame.count)
+    }
+    else {
+        let str = frame.buff.toString("ascii", 0, frame.count).trim()
+        if (str == "AT+Z") {
+            return
+        }
+
+        let valid = str == "a" ||
+                    str == "+++" ||
+                    str == "ERR=-1" ||
+                    str == "+ok" ||
+                    str == "AT+Z\n\r+ok"
+
+        if (valid) {
+            eventStr = str
+        } else {
+            frame.count
+            return
+        }
     }
 
-    let end = frame.buff.toString("ascii", frame.count-4, frame.count)
-    if (end == "\r\n\r\n") {
-        handleEvent(frame.buff.toString("ascii", 0, frame.count))
-    }
+    handleEvent(eventStr)
 }
 
 function handleEvent(eventStr) {
