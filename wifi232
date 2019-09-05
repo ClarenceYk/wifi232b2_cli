@@ -5,6 +5,7 @@
 global.debugOn = false
 global.uartDevice = undefined
 global.deviceReady = false
+global.devicePower = false
 global.intervalHandle = undefined
 
 const fs = require("fs")

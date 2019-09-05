@@ -6,6 +6,7 @@ var init = function () {
         action: "+++",
         handle: function (data, sender) {
             if (data == "a") { // response of wifi232
+                devicePower = true
                 if (debugOn) {
                     console.log("[Debug] Sending:", data, "to wifi232")
                 }

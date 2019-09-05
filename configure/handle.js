@@ -53,6 +53,11 @@ function handleEvent(eventStr) {
 
     frame.count = 0
     let ed = eventStr.trim().split("\n\r")
+
+    if (ed[0] == "") { // avoiding empty event
+        return
+    }
+
     if (ed.length == 1) { // special case for open event
         matchers.get("open").handle(ed[0], sender)
     }
