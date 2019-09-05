@@ -35,9 +35,6 @@ function handleChar(c) {
     }
     else {
         let str = frame.buff.toString("ascii", 0, frame.count).trim()
-        if (str == "AT+Z") {
-            return
-        }
 
         let valid = str == "a" ||
                     str == "+++" ||
@@ -45,12 +42,10 @@ function handleChar(c) {
                     str == "+ok" ||
                     str == "AT+Z\n\r+ok"
 
-        if (valid) {
-            eventStr = str
-        } else {
-            frame.count
+        if (!valid) {
             return
         }
+        eventStr = str
     }
 
     handleEvent(eventStr)
