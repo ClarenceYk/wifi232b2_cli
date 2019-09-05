@@ -24,6 +24,9 @@ var init = function () {
                     console.log("[Debug] Command sent")
                 }
                 clearInterval(intervalHandle)
+                if (debugOn) {
+                    console.log("[Debug] Sending:", this.action)
+                }
                 sender.write(this.action+"\n") // "\n" is important!
             } else {
                 if (debugOn) {

@@ -21,6 +21,9 @@ var init = function () {
             } else {
                 console.log("Unknown event:", data)
             }
+            if (debugOn) {
+                console.log("[Debug] Sending:", "AT+ENTM")
+            }
             sender.write("AT+ENTM\n")
         },
         inquire: function (sender) {
@@ -30,6 +33,9 @@ var init = function () {
                     console.log("[Debug] Command sent")
                 }
                 clearInterval(intervalHandle)
+                if (debugOn) {
+                    console.log("[Debug] Sending:", this.action)
+                }
                 sender.write(this.action+"\n")
             } else {
                 if (debugOn) {
@@ -44,7 +50,10 @@ var init = function () {
                     console.log("[Debug] Command sent")
                 }
                 clearInterval(intervalHandle)
-                sender.write(this.action+"="+argv.toUpperCase()+"\n")
+                if (debugOn) {
+                    console.log("[Debug] Sending:", this.action+"="+argv)
+                }
+                sender.write(this.action+"="+argv+"\n")
             } else {
                 if (debugOn) {
                     console.log("[Debug] waiting device ready...")

@@ -15,6 +15,7 @@ var init = function () {
             else if (data == "+++") {
                 if (debugOn) {
                     console.log("[Debug] wifi232 already in config mode")
+                    console.log("[Debug] Sending: \\n")
                 }
                 sender.write("\n")
             } else if (data == "+ok") {
