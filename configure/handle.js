@@ -24,7 +24,7 @@ function handleChar(c) {
     frame.buff[frame.count++] = c
 
     if (deviceReady) {
-        if (frame.count < 5) { // not enough
+        if (frame.count < 4) { // not enough
             return
         }
         let end = frame.buff.toString("ascii", frame.count-4, frame.count)
