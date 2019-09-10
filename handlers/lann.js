@@ -28,7 +28,7 @@ var init = function () {
         }
         sender.write("AT+ENTM\n")
     }
-    register.register("AT+LANN", handler)
+    register.register(name, handler)
 }
 
 module.exports = init
