@@ -50,40 +50,40 @@ function swingTimerHandler(sender) {
 }
 
 var init = function () {
-    register("AT+Z", {
-        action: "AT+Z",
-        info: "   z\t\t重启模块",
-        handle: function (data, sender) {
-            if (data == "+ok") {
-                swingTimer = setInterval( () => swingTimerHandler(sender), picInterval)
-            } else if (data.includes("ERR")) {
-                console.log("ERROR:", data)
-                process.exit(1)
-            } else {
-                console.log("Unknown event:", data)
-                process.exit(1)
+    let name = "AT+Z"
+    let handler = register.createHandler(name)
+    handler.info = "   z\t\t重启模块"
+    handler.handle = function (data, sender) {
+        if (data == "+ok") {
+            swingTimer = setInterval( () => swingTimerHandler(sender), picInterval)
+        } else if (data.includes("ERR")) {
+            console.log("ERROR:", data)
+            process.exit(1)
+        } else {
+            console.log("Unknown event:", data)
+            process.exit(1)
+        }
+    }
+    handler.inquire = function (sender) {
+        if (deviceReady) {
+            if (debugOn) {
+                console.log("[Debug] Device ready")
+                console.log("[Debug] Command sent")
             }
-        },
-        inquire: function (sender) {
-            if (deviceReady) {
-                if (debugOn) {
-                    console.log("[Debug] Device ready")
-                    console.log("[Debug] Command sent")
-                }
-                clearInterval(intervalHandle)
-                deviceReady = false
-                devicePower = false
-                if (debugOn) {
-                    console.log("[Debug] Sending:", this.action)
-                }
-                sender.write(this.action+"\n")
-            } else {
-                if (debugOn) {
-                    console.log("[Debug] waiting device ready...")
-                }
+            clearInterval(intervalHandle)
+            deviceReady = false
+            devicePower = false
+            if (debugOn) {
+                console.log("[Debug] Sending:", this.action)
+            }
+            sender.write(this.action+"\n")
+        } else {
+            if (debugOn) {
+                console.log("[Debug] waiting device ready...")
             }
         }
-    })
+    }
+    register.register(name, handler)
 }
 
 module.exports = init
