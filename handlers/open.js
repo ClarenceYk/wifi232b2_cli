@@ -2,7 +2,7 @@
 const register = require("../configure/register")
 
 var init = function () {
-    register("open", {
+    register.register("open", {
         action: "+++",
         handle: function (data, sender) {
             if (data == "a") { // response of wifi232
