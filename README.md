@@ -18,18 +18,18 @@ cd wifi232_cli
 ## 配置命令
 
 | 是否实现 | 命令 | 描述 |
-| --- | --- | --- |
-| <li> - [x] </li> | entm | 退出 AT 命令模式，返回透传模式 |
-| <li> - [x] </li> | lann | 设置或查询 LAN 设置 |
-| <li> - [x] </li> | mid | 查询模块 MID |
-| <li> - [x] </li> | netp | 设置或查询网络协议参数 |
-| <li> - [x] </li> | z | 重启模块 |
-| <li> - [x] </li> | tmode | 设置或查询数据传输模式 |
-| <li> - [x] </li> | ver | 查询软件版本 |
-| <li> - [x] </li> | wakey | 设置或查询 WIFI AP 模式下的加密参数 |
-| <li> - [x] </li> | wap | 设置或查询 WIFI AP 模式下的参数 |
-| <li> - [x] </li> | wmode | 设置或查询 WIFI 操作模式（AP 或者 STA） |
-| <li> - [x] </li> | help | 显示帮助信息 |
+| :---: | --- | --- |
+| <li>[x]</li> | entm | 退出 AT 命令模式，返回透传模式 |
+| <li>[x]</li> | lann | 设置或查询 LAN 设置 |
+| <li>[x]</li> | mid | 查询模块 MID |
+| <li>[x]</li> | netp | 设置或查询网络协议参数 |
+| <li>[x]</li> | z | 重启模块 |
+| <li>[x]</li> | tmode | 设置或查询数据传输模式 |
+| <li>[x]</li> | ver | 查询软件版本 |
+| <li>[x]</li> | wakey | 设置或查询 WIFI AP 模式下的加密参数 |
+| <li>[x]</li> | wap | 设置或查询 WIFI AP 模式下的参数 |
+| <li>[x]</li> | wmode | 设置或查询 WIFI 操作模式（AP 或者 STA） |
+| <li>[x]</li> | help | 显示帮助信息 |
 
 ## 使用
 
