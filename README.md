@@ -15,6 +15,21 @@ git clone https://github.com/ClarenceYk/wifi232b2_cli.git
 cd wifi232_cli
 ```
 
+## 配置参数
+
+```
+$ cat ./config
+{
+    "device": "/dev/ttymxc1",
+    "baudRate": 57600,
+    "debugOn": false
+}
+```
+
+- `device`: 串口设备文件路径，默认为 `/dev/ttymxc1`
+- `baudRate`: 指定波特率，默认为 `57600`
+- `debugOn`: 打印调试信息，默认关闭
+
 ## 配置命令
 
 | 是否实现 | 命令 | 描述 |
