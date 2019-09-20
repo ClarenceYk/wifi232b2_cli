@@ -10,7 +10,7 @@
 ## 安装
 
 ```
-sudo cnpm install -g serialport --unsafe-perm --build-from-source
+sudo npm install -g serialport --unsafe-perm --build-from-source
 git clone https://github.com/ClarenceYk/wifi232b2_cli.git
 cd wifi232_cli
 ```
@@ -33,7 +33,7 @@ cd wifi232_cli
 
 ## 使用
 
-通过 help 参数查看帮助信息：
+通过 `help` 参数查看帮助信息：
 
 ```
 $ ./wifi232 help
