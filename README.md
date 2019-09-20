@@ -19,17 +19,17 @@ cd wifi232_cli
 
 | 是否实现 | 命令 | 描述 |
 | :---: | --- | --- |
-| :heavy_check_mark: | entm | 退出 AT 命令模式，返回透传模式 |
-| :heavy_check_mark: | lann | 设置或查询 LAN 设置 |
-| :heavy_check_mark: | mid | 查询模块 MID |
-| :heavy_check_mark: | netp | 设置或查询网络协议参数 |
-| :heavy_check_mark: | z | 重启模块 |
-| :heavy_check_mark: | tmode | 设置或查询数据传输模式 |
-| :heavy_check_mark: | ver | 查询软件版本 |
-| :heavy_check_mark: | wakey | 设置或查询 WIFI AP 模式下的加密参数 |
-| :heavy_check_mark: | wap | 设置或查询 WIFI AP 模式下的参数 |
-| :heavy_check_mark: | wmode | 设置或查询 WIFI 操作模式（AP 或者 STA） |
-| :heavy_check_mark: | help | 显示帮助信息 |
+| :heavy_check_mark: | `entm` | 退出 AT 命令模式，返回透传模式 |
+| :heavy_check_mark: | `lann` | 设置或查询 LAN 设置 |
+| :heavy_check_mark: | `mid` | 查询模块 MID |
+| :heavy_check_mark: | `netp` | 设置或查询网络协议参数 |
+| :heavy_check_mark: | `z` | 重启模块 |
+| :heavy_check_mark: | `tmode` | 设置或查询数据传输模式 |
+| :heavy_check_mark: | `ver` | 查询软件版本 |
+| :heavy_check_mark: | `wakey` | 设置或查询 WIFI AP 模式下的加密参数 |
+| :heavy_check_mark: | `wap` | 设置或查询 WIFI AP 模式下的参数 |
+| :heavy_check_mark: | `wmode` | 设置或查询 WIFI 操作模式（AP 或者 STA） |
+| :heavy_check_mark: | `help` | 显示帮助信息 |
 
 ## 使用
 
